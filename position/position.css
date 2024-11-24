@@ -1,0 +1,54 @@
+/* body{
+margin: 0;
+padding: 0;
+} */
+
+div{
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    border: 5px solid black;
+    margin : 10px;
+    display : inline-block;
+}
+
+#middle{
+    background-color: pink;
+}
+#static #middle{
+    position : static;
+    top: 100px; 
+    /* this will have no effect as top right left etc are ignored in static. */
+}
+/* display is block or inline  */
+
+#relative #middle{
+    position : relative;
+    top: 10px;
+    /* isse sirf block neeche chala gaya 100px without distrubing the other divs */
+    /* left: 100px; */
+}
+
+
+#absolute #middle{
+    position : absolute;
+    /* when i only do absolute then only 2 blocks are seen , one pink and one green  */
+    /* the reason for this is the pink one is removed from the flow of the document and it has no space created for itself in the page layout , so the other green block is beneath it , they are stacked together 
+    try to apply top or any other property  */
+
+    top: 10px;
+    /* upar chala gaya ek dum top pr  */
+    /* why is this happening ? because iska jo parent container hai #absolute woh bhi static hai (by default kyuki aur koi explicitly mentioned nai hai)
+    for absolute to function , iske parent ki position should be anything except static , isliye we did #absolte ki position as relative  */
+}
+
+#absolute{
+    position : relative;
+}
+
+
+#fixed #middle{
+    position : fixed;
+    top: 0px;
+    left: 0px;
+}
